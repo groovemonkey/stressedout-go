@@ -35,3 +35,10 @@ Delete with `docker kill pg_stressedout`
 - <http://localhost:8080/dynamic> - Dynamic page using Go templating
 - <http://localhost:8080/read> - Dynamic page that reads from the database
 - <http://localhost:8080/write> - Dynamic page that writes to the database and then reads from it
+
+## Perf Testing
+
+```bash
+cd perf
+./wrk.sh`
+```
