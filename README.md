@@ -42,3 +42,7 @@ Delete with `docker kill pg_stressedout`
 cd perf
 ./wrk.sh`
 ```
+
+## TODO
+
+- There's a bug in the /write handler where the user sometimes seems to be nil. In the logs, it looks like this: `2024/07/29 17:15:53 error inserting new review: ERROR #23502 null value in column "product_id" of relation "reviews" violates not-null constraint` (happens when attempting to insert orders, too)
