@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>{{.ProductName}}</h1>
+    <ul>
+      <p>Order count: {{.OrderCount}}</p>
+      <p>Unique user count: {{.UniqueUserCount}}</p>
+    </ul>
+    {{range $idx, $review := .Reviews}}
+      <p>Username: {{$review.Username}}</p>
+      <p>Rating: {{$review.Rating}}</p>
+      <p>Content: {{$review.Content}}</p>
+    {{end}}
+</body>
+</html>
