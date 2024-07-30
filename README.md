@@ -17,7 +17,13 @@ export POSTGRES_DB="stressedout"
 Run the postgres container:
 
 ```bash
-docker run --rm --name pg_stressedout -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=stressedout -d -p 5432:5432 postgres
+docker run --rm --name pg_stressedout \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=stressedout \
+  # this way of setting max connections doesn't work
+  # -e POSTGRES_MAX_CONNECTIONS=1000 \
+  # but using -N max_conns does
+  -d -p 5432:5432 postgres -N 400
 ```
 
 Connect to pg with `psql -h localhost -p 5432 -U postgres -d stressedout`

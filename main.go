@@ -76,6 +76,8 @@ func pgOptionsFromEnv() *pg.Options {
 		User:     user,
 		Password: password,
 		Database: database,
+		// Bigger Poolsize
+		PoolSize: 400,
 	}
 }
 
@@ -223,6 +225,12 @@ func (app *App) handleDBWrite(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Printf("error selecting random product: %v", err)
 	}
+	// catch weird nil product error
+	if product.ID == uuid.Nil {
+		log.Printf("Got a nil product! %v", product)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
 	// Get a random user
 	var user User
@@ -233,6 +241,12 @@ func (app *App) handleDBWrite(w http.ResponseWriter, r *http.Request) {
 	`)
 	if err != nil {
 		log.Printf("error selecting random user: %v", err)
+	}
+	// catch weird nil user error
+	if user.ID == uuid.Nil {
+		log.Printf("Got a nil user! %v", user)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 
 	// Create a new order
