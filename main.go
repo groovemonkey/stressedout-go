@@ -363,8 +363,8 @@ func setupDatabase(db *pg.DB) error {
 			total_price NUMERIC(10, 2) NOT NULL,
 			date TIMESTAMP WITH TIME ZONE NOT NULL
 		);
-    CREATE UNIQUE INDEX user_idx ON orders (user_id);
-    CREATE UNIQUE INDEX product_idx ON orders (product_id);
+    CREATE UNIQUE INDEX order_user_idx ON orders (user_id);
+    CREATE UNIQUE INDEX order_product_idx ON orders (product_id);
 	`)
 	if err != nil {
 		log.Printf("error creating orders table: %v", err)
@@ -379,8 +379,8 @@ func setupDatabase(db *pg.DB) error {
 			rating INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 100),
 			content TEXT NOT NULL
 		);
-    CREATE UNIQUE INDEX user_idx ON reviews (user_id);
-    CREATE UNIQUE INDEX product_idx ON reviews (product_id);
+    CREATE UNIQUE INDEX review_user_idx ON reviews (user_id);
+    CREATE UNIQUE INDEX review_product_idx ON reviews (product_id);
 	`)
 	if err != nil {
 		log.Printf("error creating reviews table: %v", err)
